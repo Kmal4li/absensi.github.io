@@ -80,7 +80,7 @@ toggle="dropdown">
     <ul class="sidebar-nav" id="sidebar-nav">
         <!-- Dashboard Link -->
         <li class="nav-item">
-            <a class="nav-link" href="index.php">
+            <a class="nav-link" href="/home">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -96,7 +96,7 @@ toggle="dropdown">
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('pegawai') }}">
+            <a class="nav-link" href="{{ url('kehadiran') }}">
                 <i class="bi bi-menu-button-wide"></i><span>Laporan Kehadiran</span>
             </a>
         </li><!-- End Pegawai Nav -->

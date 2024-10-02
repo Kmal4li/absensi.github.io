@@ -12,20 +12,27 @@ class AbsensiController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $absensi = DB::table('absensi')->get();
-        return view('absensi.index', compact('absensi'));
-    }
+{
+    $absensi = DB::table('absensi')
+        ->join('pegawai', 'absensi.id_pegawai', '=', 'pegawai.id_pegawai')
+        ->select('absensi.*', 'pegawai.nama')
+        ->get();
+    return view('absensi.index', compact('absensi'));
+}
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $pegawai = DB::table('pegawai')->get();
-        return view('absensi.create', compact('pegawai'));
-    }
+{
+    $absensi = DB::table('absensi')->get();
+    $pegawai = DB::table('pegawai')->get(); 
+    return view('absensi.create', compact('absensi', 'pegawai'));
+}
 
+
+    
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -33,18 +40,18 @@ class AbsensiController extends Controller
     {
 
         try {
-            DB::table('absensi')->insert([
+            $query=DB::table('absensi')->insert([
                 'id_pegawai' => $request->id_pegawai,
                 'nama' => $request->nama,
                 'tanggal' => $request->tanggal,
                 'jam_masuk' => $request->jam_masuk,
-                'jam_keluar' => $request->jam_keluar,
+                'jam_pulang' => $request->jam_pulang,
                 'status' => $request->status,
             ]);
 
             return redirect('absensi')->with('status', 'Absensi karyawan berhasil ditambah.');
         } catch(\Illuminate\Database\QueryException $ex){  
-            return  redirect('pegawai')-> with ('status', $ex);
+            return  redirect('absensi')-> with ('status', $ex);
         }
     }
 
@@ -85,7 +92,7 @@ class AbsensiController extends Controller
             'nama' => 'required|string|max:255',
             'tanggal' => 'required|date',
             'jam_masuk' => 'required',
-            'jam_keluar' => 'required',
+            'jam_pulang' => 'required',
             'status' => 'required|string'
         ]);
 
@@ -95,7 +102,7 @@ class AbsensiController extends Controller
                 'nama' => $request->nama,
                 'tanggal' => $request->tanggal,
                 'jam_masuk' => $request->jam_masuk,
-                'jam_keluar' => $request->jam_keluar,
+                'jam_pulang' => $request->jam_pulang,
                 'status' => $request->status,
             ]);
 

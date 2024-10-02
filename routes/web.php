@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\KehadiranController;
 
 Route::get('/', function () {
     return view('welcome',['title' => 'Website Absensi Pegawai']);
@@ -21,6 +22,7 @@ Route::get('absensi/show', [AbsensiController::class, 'show'])->name('absensi.sh
 Route::get('absensi/{id_pegawai}/edit', [AbsensiController::class, 'edit'])->name('absensi.edit');
 Route::put('absensi/{id_pegawai}', [AbsensiController::class, 'update'])->name('absensi.update');
 
+
 //pegawai 
 Route::get('pegawai',[PegawaiController::class, 'index'])->name('pegawai.index');
 Route::delete('pegawai/{id_pegawai}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
@@ -30,6 +32,10 @@ Route::get('pegawai/show', [PegawaiController::class, 'show'])->name('pegawai.sh
 Route::get('pegawai/{id_pegawai}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
 Route::put('pegawai/{id_pegawai}', [PegawaiController::class, 'update'])->name('pegawai.update');  
 
-Route::get('/absensi', [AbsensiController::class, 'create']); // Form absensi untuk user
-Route::post('/absensi', [AbsensiController::class, 'store']); // Proses penyimpanan data absensi
-Route::get('/admin/absensi', [AbsensiController::class, 'index']); // Halaman admin untuk melihat data absensi
+//pengguna
+Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');  
+Route::get('pengguna/create', [PenggunaController::class, 'create'])->name('pengguna.create');
+Route::post('pengguna', [PenggunaController::class, 'store'])->name('pengguna.store');
+
+//kehadiran
+Route::get('kehadiran', [KehadiranController::class, 'index'])->name('pengguna.index');  
